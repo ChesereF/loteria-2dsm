@@ -1,4 +1,4 @@
-import trevo from "../../assets/trevo-quina.png";
+import trevo from "../../assets/trevo-timemania.png";
 import { useLoteria } from "../../hooks";
 import {
   Principal,
@@ -12,15 +12,15 @@ import {
   Carregando,
 } from "../../components";
 
-export default function Quina() {
-  const { quina: sorteio } = useLoteria();
+export default function Timemania() {
+  const { timemania: sorteio } = useLoteria();
 
   return (
     <>
       {sorteio.dataApuracao ? (
         <Principal>
           <Esquerda>
-            <NomeLoteria trevo={trevo} nome="QUINA" />
+            <NomeLoteria trevo={trevo} nome="TIMEMANIA" />
             <Estimativa
               dataProximoConcurso={sorteio.dataProximoConcurso}
               valorEstimadoProximoConcurso={

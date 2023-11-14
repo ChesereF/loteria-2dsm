@@ -1,21 +1,24 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Megasena from "../pages/Megasena";
-import Lotofacil from "../pages/Lotofacil";
+import Timemania from "../pages/Timemania";
 import Quina from "../pages/Quina";
 import "./index.css";
-import Menu from "../contexts/menu";
+import Menu from "../components/Menu";
+import { ThemeProvider } from "styled-components";
+import { useLoteria } from "../hooks";
 
-export default function Rotas (){
-    return (
-        <div className="principal-bloco">
-        <BrowserRouter>
-            <Menu/>
-            <Routes>
-                <Route path="/megasena" element={<Megasena />} />
-                <Route path="/lotofacil" element={<Lotofacil />} />
-                <Route path="/quina" element={<Quina />} />
-            </Routes>
-        </BrowserRouter>
-        </div>
-    );
+export default function Rotas() {
+  const { tema } = useLoteria();
+  return (
+    <ThemeProvider theme={tema}>
+      <BrowserRouter>
+        <Menu />
+        <Routes>
+          <Route path="/mega" element={<Megasena />} />
+          <Route path="/timemania" element={<Timemania />} />
+          <Route path="/quina" element={<Quina />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
+  );
 }

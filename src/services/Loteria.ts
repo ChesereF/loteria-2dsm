@@ -1,7 +1,6 @@
-
-
 import { LoteriaProps } from "../types";
 import api from "./api";
+import resultado from "./resultado";
 
 class Loteria {
     async get(): Promise<LoteriaProps> {

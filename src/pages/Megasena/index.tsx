@@ -1,54 +1,28 @@
-import "./index.css";
+
 import trevo from "../../assets/trevo-megasena.png";
 import { useLoteria } from "../../hooks";
- 
+import { Principal, Esquerda, Direita, Resultado, NomeLoteria, Estimativa, Acumulou, Data, Carregando } from "../../components";
+
 export default function Megasena() {
-  const { megasena } = useLoteria();
- 
+  const { megasena:sorteio } = useLoteria();
+
   return (
     <>
-      {megasena.dataApuracao ? (
-        <div className="mega-bloco-principal">
-          <div>
-            <div className="mega-bloco-loteria">
-              <img src={trevo} alt="" />
-              <span className="mega-nome-loteria">MEGA-SENA</span>
-            </div>
-            <div className="mega-bloco-estimativa">
-              <div className="mega-texto-estimativa">
-                Estimativa de prêmio do próximo concurso. Sorteio em{" "}
-                {megasena.dataProximoConcurso}:
-              </div>
-              <div className="mega-valor-estimativa">
-                {megasena.valorEstimadoProximoConcurso.toLocaleString("pt-Br", {
-                  style: "currency",
-                  currency: "BRL",
-                })}
-              </div>
-            </div>
-          </div>
-          <div className="mega-bloco-direita">
-            <div className="mega-linha-bola">
-              {megasena.dezenas.map((dezena) => (
-                <div className="mega-bola" key={dezena}>
-                  {dezena}
-                </div>
-              ))}
-            </div>
-            <div className="mega-texto-acumulou">
-              {megasena.quantidadeGanhadores === 0
-                ? "ACUMULOU!"
-                : `${megasena.quantidadeGanhadores} GANHADORES`}
-            </div>
-            <div className="mega-data-concurso">
-              {`Concurso ${megasena.numeroDoConcurso} - ${megasena.dataPorExtenso}`}
-            </div>
-          </div>
-        </div>
+      {sorteio.dataApuracao ? (
+        <Principal>
+          <Esquerda>
+           <NomeLoteria trevo={trevo} nome="MEGA-SENA" />
+           <Estimativa dataProximoConcurso={sorteio.dataProximoConcurso} valorEstimadoProximoConcurso={sorteio.valorEstimadoProximoConcurso}/>
+            
+          </Esquerda>
+          <Direita>
+            <Resultado dezenas={sorteio.dezenas} />
+            <Acumulou quantidadeGanhadores={sorteio.quantidadeGanhadores} />
+         <Data numeroDoConcurso={sorteio.numeroDoConcurso} dataPorExtenso={sorteio.dataPorExtenso} />
+          </Direita>
+        </Principal>
       ) : (
-        <div className="principal-carregando">
-          <h3>Carregando...</h3>
-        </div>
+        <Carregando />
       )}
     </>
   );
